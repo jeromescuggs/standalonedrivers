@@ -1,0 +1,6 @@
+Drivers downloaded from
+http://www.mediatek.com/en/downloads/rt8070-rt3070-rt3370-rt3572-rt5370-rt5372-rt5572-usb-usb/
+
+Tested on ASUS USB-N53 and D-link DWA-160
+
+For support new USB dongles may needed to add USB vendor:product into file ./common/rtusb_dev_id.c
