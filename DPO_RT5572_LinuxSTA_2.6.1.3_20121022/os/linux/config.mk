@@ -23,7 +23,7 @@ HAS_APCLI=n
 
 # Support Wpa_Supplicant
 # i.e. wpa_supplicant -Dralink
-HAS_WPA_SUPPLICANT=n
+HAS_WPA_SUPPLICANT=y
 
 
 # Support Native WpaSupplicant for Network Maganger
@@ -32,7 +32,7 @@ HAS_WPA_SUPPLICANT=n
 # what if user want to use wpa_supplicant to serve P2P function/feature, 
 # in case, it must use Ralink Propriectary wpa_supplicant to do.
 # and this compile flag will report P2P Related Event to Ralink wpa_supplicant.
-HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=n
+HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=y
 
 #Support Net interface block while Tx-Sw queue full
 HAS_BLOCK_NET_IF=n
@@ -61,7 +61,7 @@ HAS_MSI_SUPPORT=n
 HAS_QOS_DLS_SUPPORT=n
 
 #Support for EXT_CHANNEL
-HAS_EXT_BUILD_CHANNEL_LIST=n
+HAS_EXT_BUILD_CHANNEL_LIST=y
 
 #Support for IDS 
 HAS_IDS_SUPPORT=n
@@ -82,7 +82,7 @@ HAS_DOT11_N_SUPPORT=y
 
 
 #Support for 2860/2880 co-exist 
-HAS_RT2880_RT2860_COEXIST=n
+HAS_RT2880_RT2860_COEXIST=y
 
 HAS_KTHREAD_SUPPORT=n
 
@@ -94,7 +94,7 @@ HAS_KTHREAD_SUPPORT=n
 HAS_WFD_SUPPORT=n
 
 #Support for Auto channel select enhance
-HAS_AUTO_CH_SELECT_ENHANCE=n
+HAS_AUTO_CH_SELECT_ENHANCE=y
 
 #Support statistics count
 HAS_STATS_COUNT=y
@@ -132,7 +132,7 @@ HAS_BGFP_SUPPORT=n
 HAS_BGFP_OPEN_SUPPORT=n
 
 # Support HOSTAPD function
-HAS_HOSTAPD_SUPPORT=n
+HAS_HOSTAPD_SUPPORT=y
 
 #Support GreenAP function
 HAS_GREENAP_SUPPORT=n
@@ -168,7 +168,7 @@ HAS_LED_CONTROL_SUPPORT=y
 #Must enable HAS_WSC at the same time.
 
 
-HAS_STREAM_MODE_SUPPORT=n
+HAS_STREAM_MODE_SUPPORT=y
 
 HAS_NEW_RATE_ADAPT_SUPPORT=n
 
@@ -184,7 +184,7 @@ HAS_SWITCH_CHANNEL_OFFLOAD=n
 HAS_RESOURCE_PRE_ALLOC=n
 HAS_RESOURCE_BOOT_ALLOC=n
 
-HAS_NEW_MBSSID_MODE=y
+HAS_NEW_MBSSID_MODE=n
 
 HAS_MULTI_CHANNEL=n
 #################################################
@@ -988,6 +988,12 @@ endif
 ifeq ($(PLATFORM),DM6446)
 	CFLAGS := -nostdinc -iwithprefix include -D__KERNEL__ -I$(RT28xx_DIR)/include -I$(LINUX_SRC)/include  -Wall -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Os -fno-omit-frame-pointer -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mlittle-endian -mabi=apcs-gnu -D__LINUX_ARM_ARCH__=5 -march=armv5te -mtune=arm9tdmi -msoft-float -Uarm -Wdeclaration-after-statement -c -o $(WFLAGS)
 export CFLAGS
+endif
+
+ifeq ($(PLATFORM),DM365)
+	#NEWFLAGS := -nostdinc -iwithprefix include -D__KERNEL__ -I$(RT28xx_DIR)/include -I$(LINUX_SRC)/include  -Wall -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Os -fno-omit-frame-pointer -fno-omit-frame-pointer -mapcs -mno-sched-prolog -mlittle-endian -mabi=apcs-gnu -D__LINUX_ARM_ARCH__=5 -march=armv5te -mtune=arm9tdmi -msoft-float -Uarm -Wdeclaration-after-statement -c -o $(WFLAGS)
+	EXTRA_CFLAGS := -iwithprefix include -D__KERNEL__ -I$(RT28xx_DIR)/include -I$(LINUX_SRC)/include -Wall -Os -c -o $(WFLAGS)
+export EXTRA_CFLAGS
 endif
 
 ifeq ($(PLATFORM),BL2348)

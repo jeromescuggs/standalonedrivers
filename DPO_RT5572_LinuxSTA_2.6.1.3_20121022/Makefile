@@ -27,7 +27,7 @@ include $(RT28xx_DIR)/os/linux/config.mk
 RTMP_SRC_DIR = $(RT28xx_DIR)/RT$(MODULE)
 
 #PLATFORM: Target platform
-PLATFORM = PC
+#PLATFORM = PC
 #PLATFORM = 5VT
 #PLATFORM = IKANOS_V160
 #PLATFORM = IKANOS_V180
@@ -51,6 +51,7 @@ PLATFORM = PC
 #PLATFORM = RMI_64
 #PLATFORM = KODAK_DC
 #PLATFORM = DM6446
+PLATFORM = DM365
 #PLATFORM = FREESCALE8377
 #PLATFORM = BL2348
 #PLATFORM = BL23570
@@ -285,6 +286,14 @@ ifeq ($(PLATFORM),DM6446)
 LINUX_SRC = /home/fonchi/work/soc/ti-davinci
 endif
 
+ifeq ($(PLATFORM),DM365)
+LINUX_SRC = $(DEVDIR)/kernel
+EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$(LINUX_SRC)/include -I$(RT28xx_DIR)/include
+ARCH = arm
+CROSS_COMPILE = $(DEVDIR)/codesourcery/arm-2013.05/bin/arm-none-linux-gnueabi-
+CROSS_COMPILE_INCLUDE = $(RT28xx_DIR)/include
+endif
+
 ifeq ($(PLATFORM),MT85XX)
 LINUX_SRC = /home/john/MTK/BDP_Linux/linux-2.6.27
 CROSS_COMPILE = armv6z-mediatek-linux-gnueabi-
@@ -386,8 +395,8 @@ ifeq ($(OSABL),YES)
 endif
 
 	cp -f os/linux/Makefile.6 $(RT28xx_DIR)/os/linux/Makefile
-ifeq ($(PLATFORM),DM6446)
-	$(MAKE)  ARCH=arm CROSS_COMPILE=arm_v5t_le- -C  $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
+ifeq ($(PLATFORM),DM365)
+	$(MAKE) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C  $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
 else
 ifeq ($(PLATFORM),FREESCALE8377)
 	$(MAKE) ARCH=powerpc CROSS_COMPILE=$(CROSS_COMPILE) -C  $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
