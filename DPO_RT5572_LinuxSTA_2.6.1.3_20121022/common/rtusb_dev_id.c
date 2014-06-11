@@ -185,6 +185,7 @@ USB_DEVICE_ID rtusb_dev_id[] = {
 	{USB_DEVICE(0x083A,0xB511)}, /* Panasonic */
 #endif /* RT3070 */
 #ifdef RT35xx
+	{USB_DEVICE(0x0B05,0x179D)}, /* ASUS USB-N53 (Ralink RT3572) */
 	{USB_DEVICE(0x148F,0x3572)}, /* Ralink 3572 */
 	{USB_DEVICE(0x1740,0x9801)}, /* EnGenius 3572 */
 	{USB_DEVICE(0x0DF6,0x0041)}, /* Sitecom 3572 */
