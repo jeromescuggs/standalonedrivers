@@ -294,7 +294,7 @@ ifeq ($(PLATFORM),DM365)
 LINUX_SRC = $(DEVDIR)/kernel
 EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$(LINUX_SRC)/include -I$(RT28xx_DIR)/include
 ARCH = arm
-CROSS_COMPILE = $(DEVDIR)/codesourcery/arm-2013.05/bin/arm-none-linux-gnueabi-
+CROSS_COMPILE = $(CROSSCOMPILE)
 CROSS_COMPILE_INCLUDE = $(RT28xx_DIR)/include
 endif
 

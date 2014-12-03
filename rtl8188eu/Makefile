@@ -95,7 +95,7 @@ endif
 SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ | sed -e s/ppc/powerpc/ | sed -e s/armv.l/arm/)
 
 ARCH ?= $(SUBARCH)
-CROSS_COMPILE ?=
+CROSS_COMPILE ?= $(CROSSCOMPILE)
 KVER  := $(shell uname -r)
 KSRC ?= /lib/modules/$(KVER)/build
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless
