@@ -1,7 +1,5 @@
-DEVDIR=/opt1/SDK7
-PWD=`pwd`
 ARCH=arm
-CROSS_COMPILE=$DEVDIR/codesourcery/arm-2013.05/bin/arm-none-linux-gnueabi-
+PWD=`pwd`
 KSRC=$DEVDIR/kernel
 EXTRA_CFLAGS="-DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$PWD/include"
 
@@ -14,13 +12,19 @@ export ARCH
 for path in `ls`
 do
 
-make -C $path
-
-if [ "$?" = 0  ] ;
+if [ "$path" = "build.sh" ] ;
 then
-    cd $path
-    ./copy.sh
-    cd ../
+	continue
+fi
+
+if [ "$1" = "BUILD" ] ;
+then
+	make -C $path
+fi
+
+if [ "$1" = "INSTALL" ] ;
+then
+   	cd $path && ./copy.sh && cd ..
 fi
 
 done
