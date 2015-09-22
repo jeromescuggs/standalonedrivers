@@ -13,7 +13,7 @@ export DEVDIR
 export KSRC
 export EXTRA_CFLAGS
 
-SUBDIRS="rt5572 rtl8188eu rtl8192cu rtl8192su"
+SUBDIRS="rt5572 rtl8188eu rtl8192cu"
 
 for path in ${SUBDIRS}
 do
