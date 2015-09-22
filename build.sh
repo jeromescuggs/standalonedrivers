@@ -1,21 +1,22 @@
-ARCH=arm
-PWD=`pwd`
+# !!! standalone not worked, call from sdk make !!!
 KSRC=$DEVDIR/kernel
-EXTRA_CFLAGS="-DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$PWD/include"
+EXTRA_CFLAGS="-DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$KSRC/include"
 
-export DEVDIR
+if [ -z "${CROSS_COMPILE}" ];
+then echo CROSS_COMPILE is not set - use make driversbuild
+exit 1
+fi
+
+export ARCH
 export CROSS_COMPILE
+export DEVDIR
 export KSRC
 export EXTRA_CFLAGS
-export ARCH
 
-for path in `ls`
+SUBDIRS="rt5572 rtl8188eu rtl8192cu rtl8192su"
+
+for path in ${SUBDIRS}
 do
-
-if [ "$path" = "build.sh" ] ;
-then
-	continue
-fi
 
 if [ "$1" = "BUILD" ] ;
 then
@@ -28,3 +29,4 @@ then
 fi
 
 done
+
