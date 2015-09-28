@@ -1,11 +1,16 @@
 # !!! standalone not worked, call from sdk make !!!
-KSRC=$DEVDIR/kernel
-EXTRA_CFLAGS="-DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$KSRC/include"
-
-if [ -z "${CROSS_COMPILE}" ];
+if [ "$1" = "BUILD" ] && [ -z "${CROSS_COMPILE}" ];
 then echo CROSS_COMPILE is not set - use make driversbuild
 exit 1
 fi
+
+if [ "$1" = "INSTALL" ] && [ -z "${TARGETDIR}" ];
+then echo TARGETDIR is not set - use make install_drivers
+exit 1
+fi
+
+KSRC=$DEVDIR/kernel
+EXTRA_CFLAGS="-DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_TI_DM365 -I$KSRC/include"
 
 export ARCH
 export CROSS_COMPILE
@@ -25,7 +30,7 @@ fi
 
 if [ "$1" = "INSTALL" ] ;
 then
-   	cd $path && ./copy.sh && cd ..
+    cd $path && sudo TARGETDIR=${TARGETDIR} KERNEL_NAME=${KERNEL_NAME} ./copy.sh && cd ..
 fi
 
 done
