@@ -30,7 +30,7 @@ fi
 
 if [ "$1" = "INSTALL" ] ;
 then
-    cd $path && sudo TARGETDIR=${TARGETDIR} KERNEL_NAME=${KERNEL_NAME} ./copy.sh && cd ..
+    cd $path && TARGETDIR=${TARGETDIR} KERNEL_NAME=${KERNEL_NAME} ./copy.sh && cd ..
 fi
 
 done
